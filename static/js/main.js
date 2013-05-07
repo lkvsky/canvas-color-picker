@@ -22,6 +22,6 @@ require.config({
 
 });
 
-require(['modules/app'], function(AppView){
-  new AppView({el: ".container"});
+require(['modules/color_picker_view'], function(AppView){
+  new AppView({el: ".picker"});
 });

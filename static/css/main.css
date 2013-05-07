@@ -1,5 +1,22 @@
+html {
+  background-color: #EEE;
+}
+
 canvas {
   display: block;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 90%;
+}
+
+.preview {
+  min-height: 300px;
+  width: 300px;
+  margin-bottom: 10px;
 }
 
 .color-picker {
@@ -9,18 +26,25 @@ canvas {
   border: 3px solid white;
   position: relative;
   top: -50px;
+  left: 150px;
 }
 
 .color-selector {
-  margin-top: -20px;
+  margin-top: -40px;
+}
+
+.picker {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .shade-picker {
   box-sizing: border-box;
-  height: 20px;
-  width: 20px;
+  height: 50px;
+  width: 10px;
   border: 3px solid white;
   position: relative;
-  top: -200px;
-  left: 200px;
+  top: -50px;
+  left: 150px;
 }
