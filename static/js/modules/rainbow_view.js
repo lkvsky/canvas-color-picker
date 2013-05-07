@@ -1,6 +1,10 @@
 define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
   function($, _, Backbone) {
     var SelectorView = Backbone.View.extend({
+      events: {
+        "click #rainbow": "moveSelector"
+      },
+
       initialize: function() {
         this.canvas = $("#rainbow")[0];
         this.canvas.width = this.options.width;
@@ -58,6 +62,11 @@ define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
         var pp = this.ctx.getImageData(x, y, 1, 1).data;
 
         return "rgba(" + pp[0] + ", " + pp[1] + ", " + pp[2] + ", " + pp[3] + ")";
+      },
+
+      moveSelector: function(e) {
+        var x = e.pageX - this.ctx.canvas.offsetLeft;
+        $(".selector").css("left", x);
       }
     });
 
