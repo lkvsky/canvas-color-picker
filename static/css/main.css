@@ -1,0 +1,13 @@
+canvas {
+  display: block;
+}
+
+.selector {
+  box-sizing: border-box;
+  height: 50px;
+  width: 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+  position: relative;
+  top: -50px;
+}
