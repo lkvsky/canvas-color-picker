@@ -6,7 +6,7 @@ define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
       },
 
       initialize: function() {
-        this.canvas = $("#rainbow")[0];
+        this.canvas = this.options.canvas;
         this.canvas.width = this.options.width;
         this.canvas.height = this.options.height;
         this.ctx = this.canvas.getContext("2d");
@@ -37,7 +37,7 @@ define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
       },
 
       initializeDragger: function() {
-        $(".selector").draggable({
+        $(".color-picker").draggable({
           containment: "parent",
           snapMode: "inner",
           axis: "x"
@@ -57,8 +57,8 @@ define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
       },
 
       getColor: function(e) {
-        var x = e.pageX - this.ctx.canvas.offsetLeft;
-        var y = e.pageY - this.ctx.canvas.offsetTop;
+        var x = parseInt($(".color-picker").css("left"), 10) + this.ctx.canvas.offsetLeft;
+        var y = 30;
         var pp = this.ctx.getImageData(x, y, 1, 1).data;
 
         return "rgba(" + pp[0] + ", " + pp[1] + ", " + pp[2] + ", " + pp[3] + ")";
@@ -66,7 +66,7 @@ define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
 
       moveSelector: function(e) {
         var x = e.pageX - this.ctx.canvas.offsetLeft;
-        $(".selector").css("left", x);
+        $(".color-picker").css("left", x);
       }
     });
 

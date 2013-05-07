@@ -2,12 +2,25 @@ canvas {
   display: block;
 }
 
-.selector {
+.color-picker {
   box-sizing: border-box;
   height: 50px;
-  width: 5px;
-  border: 1px solid white;
-  border-radius: 5px;
+  width: 10px;
+  border: 3px solid white;
   position: relative;
   top: -50px;
+}
+
+.color-selector {
+  margin-top: -20px;
+}
+
+.shade-picker {
+  box-sizing: border-box;
+  height: 20px;
+  width: 20px;
+  border: 3px solid white;
+  position: relative;
+  top: -200px;
+  left: 200px;
 }
