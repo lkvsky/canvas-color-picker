@@ -1,8 +1,8 @@
-define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
+define(['jquery', 'underscore', 'backbone', 'jquery_touch'],
   function($, _, Backbone) {
-    var SelectorView = Backbone.View.extend({
+    var ColorSelectorView = Backbone.View.extend({
       events: {
-        "click #rainbow": "moveSelector"
+        "click #color-canvas": "moveSelector"
       },
 
       initialize: function() {
@@ -40,7 +40,10 @@ define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
         $(".color-picker").draggable({
           containment: "parent",
           snapMode: "inner",
-          axis: "x"
+          axis: "x",
+          cursorAt: {
+            right: 20
+          }
         });
       },
 
@@ -57,7 +60,7 @@ define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
       },
 
       getColor: function(e) {
-        var x = parseInt($(".color-picker").css("left"), 10) + this.ctx.canvas.offsetLeft;
+        var x = parseInt($(".color-picker").position().left, 10) - this.ctx.canvas.offsetLeft || 0;
         var y = 30;
         var pp = this.ctx.getImageData(x, y, 1, 1).data;
 
@@ -65,10 +68,10 @@ define(['jquery', 'underscore', 'backbone', 'jquery_ui'],
       },
 
       moveSelector: function(e) {
-        var x = e.pageX - this.ctx.canvas.offsetLeft;
+        var x = e.pageX - this.ctx.canvas.offsetLeft - 5;
         $(".color-picker").css("left", x);
       }
     });
 
-    return SelectorView;
+    return ColorSelectorView;
   });

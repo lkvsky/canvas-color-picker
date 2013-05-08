@@ -11,20 +11,24 @@
 	<body>
     <div class="container">
       <div class="picker">
-        <div class="preview">
-        </div>
-        <div class="shade-selector">
-          <canvas id="shade-canvas">
-          </canvas>
-          <div class="shade-picker">
+        <form id="mood-picker">
+          <input type="text" name="mood[name]" placeholder="mood"></input>
+          <div class="preview">
           </div>
-        </div>
-        <div class="color-selector">
-          <canvas id="color-canvas">
-          </canvas>
-          <div class="color-picker">
+          <div class="shade-selector">
+            <canvas id="shade-canvas">
+            </canvas>
+            <div class="shade-picker">
+            </div>
           </div>
-        </div>
+          <div class="color-selector">
+            <canvas id="color-canvas">
+            </canvas>
+            <div class="color-picker">
+            </div>
+          </div>
+          <button type="button" id="submit-mood">feel</button>
+        </form>
       </div>
     </div>
 	</body>

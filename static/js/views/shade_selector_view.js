@@ -1,11 +1,10 @@
-define(['jquery', 'underscore', 'backbone'],
+define(['jquery', 'underscore', 'backbone', 'jquery_touch'],
   function($, _, Backbone) {
-    var SquareView = Backbone.View.extend({
+    var ShadeSelectorView = Backbone.View.extend({
       displayColor: "black",
 
       events: {
-        "drag .shade-picker": "getColor",
-        "click #square": "moveSelector"
+        "click #shade-canvas": "moveSelector"
       },
 
       initialize: function() {
@@ -28,12 +27,19 @@ define(['jquery', 'underscore', 'backbone'],
       initializeDragger: function() {
         $(".shade-picker").draggable({
           containment: "parent",
-          snapMode: "inner"
+          snapMode: "inner",
+          axis: "x",
+          cursorAt: {
+            right: 20
+          }
         });
       },
 
       initializeGrd: function() {
-        this.grd = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
+          this.grd = this.ctx.createLinearGradient(0,
+                                                    this.canvas.width/2,
+                                                    this.canvas.width,
+                                                    this.canvas.width/2);
       },
 
       addColorStops: function() {
@@ -43,20 +49,19 @@ define(['jquery', 'underscore', 'backbone'],
       },
 
       getColor: function(e) {
-        var x = parseInt($(".shade-picker").css("left"), 10) + this.ctx.canvas.offsetLeft + 20;
-        var y = parseInt($(".shade-picker").css("left"), 10) + this.ctx.canvas.offsetTop + 20;
+        var x = parseInt($(".shade-picker").position().left, 10) - this.ctx.canvas.offsetLeft || 0;
+        var y = 30;
         var pp = this.ctx.getImageData(x, y, 1, 1).data;
-        console.log("rgba(" + pp[0] + ", " + pp[1] + ", " + pp[2] + ", " + pp[3] + ")");
+
         return "rgba(" + pp[0] + ", " + pp[1] + ", " + pp[2] + ", " + pp[3] + ")";
       },
 
       moveSelector: function(e) {
-        var x = e.pageX - this.ctx.canvas.offsetLeft - 10;
-        var y = e.pageY - this.ctx.canvas.offsetTop - 410;
-        $(".shade-picker").css("top", y);
+        var x = e.pageX - this.ctx.canvas.offsetLeft - 5;
+
         $(".shade-picker").css("left", x);
       }
     });
 
-    return SquareView;
+    return ShadeSelectorView;
 });
