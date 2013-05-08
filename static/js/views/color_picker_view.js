@@ -39,6 +39,10 @@ define(['jquery', 'underscore', 'backbone', 'views/color_selector_view', 'views/
         var that = this;
         var color = that.square.getColor();
 
+        if (color == "rgba(0, 0, 0, 0)") {
+          color = "white";
+        }
+
         $(".preview").css("background-color", color);
         $("#submit-mood").css("background-color", color);
       }

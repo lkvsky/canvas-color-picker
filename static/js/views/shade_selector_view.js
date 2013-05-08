@@ -30,7 +30,7 @@ define(['jquery', 'underscore', 'backbone', 'jquery_touch'],
           snapMode: "inner",
           axis: "x",
           cursorAt: {
-            right: 20
+            right: 25
           }
         });
       },
