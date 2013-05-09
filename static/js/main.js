@@ -1,4 +1,5 @@
 require.config({
+  baseUrl: '/static/js',
 
   paths: {
     jquery: 'lib/jquery',
@@ -22,11 +23,15 @@ require.config({
 
     'jquery_touch': {
       deps: ['jquery_ui']
+    },
+
+    'handlebars': {
+      exports: 'Handlebars'
     }
   }
 
 });
 
-require(['views/color_picker_view'], function(AppView){
-  new AppView({el: ".picker"});
+require(['views/index_mood_view'], function(IndexMoodView){
+  new IndexMoodView({el: ".container"});
 });

@@ -25,27 +25,56 @@ class Mood(db.Model):
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        values = {
-          # 'debug': is_devserver()
-        }
-        template = jinja_environment.get_template('templates/index.html')
-        self.response.out.write(template.render(values))
+        user = users.get_current_user()
+
+        if user:
+            values = {
+              # 'debug': is_devserver()
+            }
+            template = jinja_environment.get_template('templates/index.html')
+            self.response.out.write(template.render(values))
+        else:
+            greeting = ("<a href=\"%s\">Sign in or register</a>." %
+            users.create_login_url("/"))
+            self.response.out.write("<html><body>%s</body></html>" % greeting)
 
 
 class MoodsHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         formatted_moods = []
+
         if user:
-            mood_query = db.GqlQuery("SELECT * FROM Moods WHERE user_id = :1", user.user_id())
-            moods = mood_query.get()
+            moods = db.GqlQuery("SELECT * FROM Mood WHERE user_id = :1", user.user_id())
+
             if moods:
                 for mood in moods:
                     formatted_moods.append(mood.to_dict())
+
         self.response.out.write(json.dumps(formatted_moods))
+
+    def post(self):
+        user = users.get_current_user()
+        mood_data = json.loads(self.request.body)
+
+        name = mood_data.get("name", "")
+        color = mood_data.get("color", "")
+
+        mood = Mood(name=name, color=color, user_id=user.user_id())
+        mood.put()
+
+        self.response.out.write(json.dumps(mood.to_dict()))
+
+
+class UserHandler(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        formatted_user = {"name": user.nickname(), "email": user.email(), "id": user.user_id()}
+        self.response.out.write(json.dumps(formatted_user))
 
 
 app = webapp2.WSGIApplication([
   ('/', MainPage),
-  ('/moods', MoodsHandler)
+  ('/moods', MoodsHandler),
+  ('/user', UserHandler)
   ],  debug=True)

@@ -9,26 +9,28 @@
 		<script data-main="static/js/main" src="static/js/lib/require.js"></script>
 	</head>
 	<body>
-    <div class="container">
-      <div class="picker">
+    <div class="container clearfix">
+      <div class="mood-new">
         <form id="mood-picker">
-          <input type="text" name="mood[name]" placeholder="mood"></input>
-          <div class="preview">
+          <input type="text" id="mood-name" class="bar" placeholder="how are you?"></input>
+          <div class="preview mood-tile">
           </div>
           <div class="shade-selector">
             <canvas id="shade-canvas">
             </canvas>
-            <div class="shade-picker">
+            <div class="shade-picker selector">
             </div>
           </div>
           <div class="color-selector">
             <canvas id="color-canvas">
             </canvas>
-            <div class="color-picker">
+            <div class="color-picker selector">
             </div>
           </div>
-          <button type="button" id="submit-mood">feel</button>
+          <button class="bar" type="button" id="submit-mood">emote</button>
         </form>
+      </div>
+      <div class="mood-index">
       </div>
     </div>
 	</body>
