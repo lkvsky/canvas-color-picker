@@ -32,6 +32,7 @@ require.config({
 
 });
 
-require(['views/index_mood_view'], function(IndexMoodView){
-  new IndexMoodView({el: ".container"});
+require(['routers/router'], function(Router){
+  new Router();
+  Backbone.history.start();
 });
